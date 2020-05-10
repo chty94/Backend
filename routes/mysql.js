@@ -18,17 +18,21 @@ router.post('/', async(req, res, next) => {
   console.log("post request");
   try {
     var gmail = req.body.gmail;
+    console.log(req.body);
     let results = await db.one(gmail);
     len = results.length;
     if (len != 0){
       if (results[0].type == '1'){
+        res.header("Access-Control-Allow-Origin", "*");
         res.send('g')
       }
       else {
+        res.header("Access-Control-Allow-Origin", "*");
         res.send('y')
       }
     }
     else {
+      res.header("Access-Control-Allow-Origin", "*");
       res.send('x');
     }
   } catch(e) {
@@ -43,9 +47,11 @@ router.post('/insert', async(req, res, next) => {
   try {
     let results = await db.insert(req.body.gmail, req.body.name, req.body.type);
     if (results == "done"){
+      res.header("Access-Control-Allow-Origin", "*");
       res.send('y')
     }
     else {
+      res.header("Access-Control-Allow-Origin", "*");
       res.send('x');
     }
   } catch(e) {

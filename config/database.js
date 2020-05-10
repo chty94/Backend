@@ -24,7 +24,6 @@ chirprdb.all = () => {
 
 chirprdb.one = (gmail) => {
   return new Promise((resolve, reject) => {
-    console.log(gmail)
     var sql = `select * from 유저 where gmail=\'`+gmail+'\'';
     console.log(sql);
     pool.query(sql, (err, results) => {
