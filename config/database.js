@@ -24,7 +24,11 @@ chirprdb.all = () => {
 
 chirprdb.one = (gmail) => {
   return new Promise((resolve, reject) => {
-    pool.query(`select * from  유저 where gmail = ?`, [gmail], (err, results) => {
+    console.log(gmail)
+    var sql = `select * from 유저 where gmail=\'`+gmail+'\'';
+    console.log(sql);
+    pool.query(sql, (err, results) => {
+      console.log(results);
       if(err) {
         return reject(err);
       }
@@ -39,7 +43,7 @@ chirprdb.insert = (gmail, name, type) => {
       if(err) {
         return reject(err);
       }
-      return resolve(results);
+      return resolve("done");
     });
   });
 }
