@@ -47,4 +47,21 @@ chirprdb.insert = (gmail, name, type) => {
   });
 }
 
+chirprdb.find = (latitude0, longitude0, latitude1, longitude1) => {
+  return new Promise((resolve, reject) => {
+    small_latitude = latitude0 < latitude1 ? latitude0 : latitude1;
+    big_latitude = latitude0 < latitude1 ? latitude1 : latitude0;
+    small_longitude = longitude0 < longitude1 ? longitude0 : longitude1;
+    big_longitude = longitude0 < longitude1 ? longitude1 : longitude0;
+    pool.query(`select *
+                from 프렌차이즈상세정보2 natural join 프렌차이즈기본할인
+                where latitude > ? and latitude < ? and longitude > ? and longitude < ?`,[small_latitude, big_latitude, small_longitude, big_longitude], (err, results) => {
+      if(err) {
+        return reject(err);
+      }
+      return resolve(results);
+    });
+  });
+}
+
 module.exports = chirprdb;
