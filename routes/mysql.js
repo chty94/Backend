@@ -24,11 +24,15 @@ router.post('/', async(req, res, next) => {
     if (len != 0){
       if (results[0].type == '1'){
         res.header("Access-Control-Allow-Origin", "*");
-        res.send('g')
+        res.send('g');
+      }
+      else if (results[0].type == '0') {
+        res.header("Access-Control-Allow-Origin", "*");
+        res.send('y');
       }
       else {
         res.header("Access-Control-Allow-Origin", "*");
-        res.send('y')
+        res.send('p');
       }
     }
     else {

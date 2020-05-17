@@ -60,4 +60,18 @@ chirprdb.find = (latitude0, longitude0, latitude1, longitude1) => {
   });
 }
 
+
+chirprdb.createcontent = (gmail, title, content) => {
+  return new Promise((resolve, reject) => {
+    pool.query(`insert into 게시판(gmail, title, content, bestnumber) values(?, ?, ?, 0)`, [gmail, title, contetnt], (err, results) => {
+      if(err) {
+        return reject(err);
+      }
+      return resolve("done");
+    });
+  });
+}
+
+
+
 module.exports = chirprdb;
