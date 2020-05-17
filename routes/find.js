@@ -10,6 +10,7 @@ router.post('/', async(req, res, next) => {
     const longitude0 = parseFloat(req.body.longitude0);
     const longitude1 = parseFloat(req.body.longitude1);
     let results = await db.find(latitude0, latitude1, longitude0, longitude1);
+    res.header("Access-Control-Allow-Origin", "*");
     res.json(results);
   } catch(e) {
     console.log(e);
