@@ -6,8 +6,8 @@ var router = express.Router();
 router.get('/', async(req, res, next) => {
   try {
     let results = await db.franchise();
-    res.json(results);
     res.header("Access-Control-Allow-Origin", "*");
+    res.json(results);
   } catch(e) {
     console.log(e);
     console.log('something happened in franchise.js');
