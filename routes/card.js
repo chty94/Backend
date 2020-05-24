@@ -3,10 +3,9 @@ var db = require('../config/database');
 
 var router = express.Router();
 
-router.post('/', async(req, res, next) => {
+router.get('/', async(req, res, next) => {
   try {
     let results = await db.card();
-    res.header("Access-Control-Allow-Origin", "*");
     res.json(results);
   } catch(e) {
     console.log(e);
