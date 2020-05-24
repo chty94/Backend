@@ -10,6 +10,8 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var mysqlRouter = require('./routes/mysql');
 var findRouter = require('./routes/find');
+var franchiseRouter = require('./routes/franchise');
+var cardRouter = require('./routes/card');
 
 var app = express();
 var cors = require('cors');
@@ -28,6 +30,8 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/mysql', mysqlRouter);
 app.use('/find', findRouter);
+app.use('/franchise', franchiseRouter);
+app.use('/card', cardRouter);
 app.use(cors());
 
 // catch 404 and forward to error handler

@@ -60,18 +60,26 @@ chirprdb.find = (latitude0, longitude0, latitude1, longitude1) => {
   });
 }
 
-
-chirprdb.createcontent = (gmail, title, content) => {
+chirprdb.franchise = () => {
   return new Promise((resolve, reject) => {
-    pool.query(`insert into 게시판(gmail, title, content, bestnumber) values(?, ?, ?, 0)`, [gmail, title, contetnt], (err, results) => {
+    pool.query(`select * from  프렌차이즈기본할인`, (err, results) => {
       if(err) {
         return reject(err);
       }
-      return resolve("done");
+      return resolve(results);
     });
   });
 }
 
-
+chirprdb.card = () => {
+  return new Promise((resolve, reject) => {
+    pool.query(`select * from  카드할인2`, (err, results) => {
+      if(err) {
+        return reject(err);
+      }
+      return resolve(results);
+    });
+  });
+}
 
 module.exports = chirprdb;

@@ -14,7 +14,7 @@ router.post('/', async(req, res, next) => {
     res.json(results);
   } catch(e) {
     console.log(e);
-    console.log('something happened');
+    console.log('something happened in find.js');
     res.sendStatus(500);
   }
 });

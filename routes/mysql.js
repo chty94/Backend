@@ -9,7 +9,7 @@ router.get('/', async(req, res, next) => {
     res.json(results);
   } catch(e) {
     console.log(e);
-    console.log('something happened');
+    console.log('something happened get/ in mysql.js');
     res.sendStatus(500);
   }
 });
@@ -41,7 +41,7 @@ router.post('/', async(req, res, next) => {
     }
   } catch(e) {
     console.log(e);
-    console.log('something happened post');
+    console.log('something happened post/ in mysql.js');
     res.sendStatus(500);
   }
 });
@@ -60,7 +60,7 @@ router.post('/insert', async(req, res, next) => {
     }
   } catch(e) {
     console.log(e);
-    console.log('something happened post');
+    console.log('something happened post/insert in mysql.js');
     res.sendStatus(500);
   }
 });
