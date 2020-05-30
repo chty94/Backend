@@ -84,7 +84,7 @@ chirprdb.card = () => {
 
 chirprdb.communication = () => {
   return new Promise((resolve, reject) => {
-    pool.query(`select no, name, title, date from 게시판 natural join 유저`, (err, results) => {
+    pool.query(`select no, name, title, date, time from 게시판 natural join 유저`, (err, results) => {
       if(err) {
         return reject(err);
       }
@@ -92,4 +92,16 @@ chirprdb.communication = () => {
     });
   });
 }
+
+chirprdb.communicationinsert = (gmail, title, content, date, time) => {
+  return new Promise((resolve, reject) => {
+    pool.query(`insert into 게시판(gmail, title, content, date, time) values(?, ?, ?, ?, ?)`,[gmail, title, content, date, time], (err, results) => {
+      if(err) {
+        return reject(err);
+      }
+      return resolve("done");
+    });
+  });
+}
+
 module.exports = chirprdb;
