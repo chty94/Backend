@@ -18,7 +18,7 @@ router.get('/', async(req, res, next) => {
 router.post('/createContent', async(req, res, next) => {
   try {
     console.log('Create Content');
-    let results = await db.communicationinsert(req.body.gmail, req.body.title, req.body.content, req.body.date, req.body.time);
+    let results = await db.communicationinsert(req.body.name, req.body.title, req.body.content, req.body.date, req.body.time);
     console.log(req.body);
     if (results == "done"){
       res.header("Access-Control-Allow-Origin", "*");
