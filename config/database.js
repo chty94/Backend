@@ -93,9 +93,21 @@ chirprdb.communication = () => {
   });
 }
 
-chirprdb.communicationinsert = (gmail, title, content, date, time) => {
+// select no from 게시판 order by no DESC limit 1;
+chirprdb.findno = () => {
   return new Promise((resolve, reject) => {
-    pool.query(`insert into 게시판(gmail, title, content, date, time) values(?, ?, ?, ?, ?)`,[gmail, title, content, date, time], (err, results) => {
+    pool.query(`select no from 게시판 order by no DESC limit 1`, (err, results) => {
+      if(err) {
+        return reject(err);
+      }
+      return resolve(results)
+    })
+  });
+}
+
+chirprdb.communicationinsert = (no, gmail, title, content, date, time) => {
+  return new Promise((resolve, reject) => {
+    pool.query(`insert into 게시판 values(?, ?, ?, ?, ?, ?)`, [no, gmail, title, content, date, time], (err, results) => {
       if(err) {
         return reject(err);
       }
@@ -103,5 +115,6 @@ chirprdb.communicationinsert = (gmail, title, content, date, time) => {
     });
   });
 }
+
 
 module.exports = chirprdb;
