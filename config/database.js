@@ -82,4 +82,14 @@ chirprdb.card = () => {
   });
 }
 
+chirprdb.communication = () => {
+  return new Promise((resolve, reject) => {
+    pool.query(`select 글id, name, title, date from 게시판 natural join 유저`, (err, results) => {
+      if(err) {
+        return reject(err);
+      }
+      return resolve(results);
+    });
+  });
+}
 module.exports = chirprdb;
