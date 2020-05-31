@@ -15,7 +15,7 @@ router.get('/', async(req, res, next) => {
   }
 });
 
-router.post('/read', async(req, res, next) => {
+router.post('/read/:no', async(req, res, next) => {
   try {
     let results = await db.read(req.body.no);
     res.header("Access-Control-Allow-Origin", "*");
