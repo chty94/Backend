@@ -141,7 +141,7 @@ chirprdb.communicationdelete = (no) => {
 // UPDATE `goonin_lounge`.`게시판` SET `title` = 'update', `content` = 'update중입니다.' WHERE (`no` = '5');
 chirprdb.communicationupdate = (no, title, content, date, time) => {
   return new Promise((resolve, reject) => {
-    pool.query(`update 게시판 set title=?, content=?, date=?, time=? where no=?`, [title, content, no, date, time], (err, results) => {
+    pool.query(`update 게시판 set title=?, content=?, date=?, time=? where no=?`, [title, content, date, time, no], (err, results) => {
       if(err) {
         return reject(err);
       }
