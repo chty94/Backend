@@ -116,9 +116,9 @@ chirprdb.communicationinsert = (no, gmail, title, content, date, time) => {
   });
 }
 
-chirprdb.readid = (no) => {
+chirprdb.read = () => {
   return new Promise((resolve, reject) => {
-    pool.query(`select no, gmail, name, type, title, content, date, time from 게시판 natural join 유저 where no=?`, [no], (err, results) => {
+    pool.query(`select no, gmail, name, type, title, content, date, time from 게시판 natural join 유저`, (err, results) => {
       if(err) {
         return reject(err);
       }
