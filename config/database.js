@@ -82,6 +82,17 @@ chirprdb.card = () => {
   });
 }
 
+chirprdb.accomodation = () => {
+  return new Promise((resolve, reject) => {
+    pool.query(`select name, address, information, phone from 숙박할인2`, (err, results) => {
+      if(err) {
+        return reject(err);
+      }
+      return resolve(results);
+    });
+  });
+}
+
 chirprdb.communication = () => {
   return new Promise((resolve, reject) => {
     pool.query(`select no, name, title, date, time from 게시판 natural join 유저`, (err, results) => {
