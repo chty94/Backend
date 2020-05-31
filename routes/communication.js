@@ -68,7 +68,7 @@ router.post('/delete', async(req, res, next) => {
 
 router.post('/update', async(req, res, next) => {
   try {
-    let results = await db.communicationupdate(req.body.no, req.body.title, req.body.content)
+    let results = await db.communicationupdate(req.body.no, req.body.title, req.body.content, req.body.date, req.body.time)
     if (results == "done") {
       res.header("Access-Control-Allow-Origin", "*");
       res.json(results);
