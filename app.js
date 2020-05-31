@@ -12,7 +12,7 @@ var mysqlRouter = require('./routes/mysql');
 var findRouter = require('./routes/find');
 var franchiseRouter = require('./routes/franchise');
 var cardRouter = require('./routes/card');
-var accomodationRouter = require('./routes/accomodation');
+var accommodationRouter = require('./routes/accommodation');
 var commuicationRouter = require('./routes/communication');
 
 var app = express();
@@ -34,7 +34,7 @@ app.use('/mysql', mysqlRouter);
 app.use('/find', findRouter);
 app.use('/franchise', franchiseRouter);
 app.use('/card', cardRouter);
-app.use('/accomodation', accomodationRouter);
+app.use('/accommodation', accommodationRouter);
 app.use('/communication', commuicationRouter);
 app.use(cors());
 
