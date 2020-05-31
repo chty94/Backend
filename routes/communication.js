@@ -15,6 +15,18 @@ router.get('/', async(req, res, next) => {
   }
 });
 
+router.get('/read/:no', async(req, res, next) => {
+  try {
+    let results = await db.readid(req.params.no);
+    res.header("Access-Control-Allow-Origin", "*");
+    res.json(results);
+  } catch(e) {
+    console.log(e);
+    console.log('something happened in communication/read');
+    res.sendStatus(500);
+  }
+});
+
 router.post('/createContent', async(req, res, next) => {
   try {
     console.log('Create Content');
@@ -31,7 +43,7 @@ router.post('/createContent', async(req, res, next) => {
     }
   } catch(e) {
     console.log(e);
-    console.log('something happened in createContent.js');
+    console.log('something happened in communication/createContent.js');
     res.sendStatus(500);
   }
 });

@@ -116,5 +116,15 @@ chirprdb.communicationinsert = (no, gmail, title, content, date, time) => {
   });
 }
 
+chirprdb.readid = (no) => {
+  return new Promise((resolve, reject) => {
+    pool.query(`select * from 게시판 where no=?`, [no], (err, results) => {
+      if(err) {
+        return reject(err);
+      }
+      return resolve(results);
+    });
+  });
+}
 
 module.exports = chirprdb;
