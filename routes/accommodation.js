@@ -5,7 +5,7 @@ var router = express.Router();
 
 router.get('/', async(req, res, next) => {
   try {
-    let results = await db.accomodation();
+    let results = await db.accommodation();
     res.header("Access-Control-Allow-Origin", "*");
     res.json(results);
   } catch(e) {

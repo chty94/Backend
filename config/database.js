@@ -82,7 +82,7 @@ chirprdb.card = () => {
   });
 }
 
-chirprdb.accomodation = () => {
+chirprdb.accommodation = () => {
   return new Promise((resolve, reject) => {
     pool.query(`select name, address, information, phone from 숙박할인2`, (err, results) => {
       if(err) {
