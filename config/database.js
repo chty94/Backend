@@ -116,6 +116,29 @@ chirprdb.communicationinsert = (no, gmail, title, content, date, time) => {
   });
 }
 
+chirprdb.communicationdelete = (no) => {
+  return new Promise((resolve, reject) => {
+    pool.query(`delete from 게시판 where no=?`, [no], (err, results) => {
+      if(err) {
+        return reject(err);
+      }
+      return resolve("done");
+    });
+  });
+}
+
+// UPDATE `goonin_lounge`.`게시판` SET `title` = 'update', `content` = 'update중입니다.' WHERE (`no` = '5');
+chirprdb.communicationupdate = (no, title, content) => {
+  return new Promise((resolve, reject) => {
+    pool.query(`update 게시판 set title=?, content=? where no=?`, [title, content, no], (err, results) => {
+      if(err) {
+        return reject(err);
+      }
+      return resolve("done");
+    });
+  });
+}
+
 chirprdb.read = (no) => {
   return new Promise((resolve, reject) => {
     pool.query(`select no, gmail, name, type, title, content, date, time from 게시판 natural join 유저 where no=?`, [no], (err, results) => {

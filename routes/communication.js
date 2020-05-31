@@ -48,4 +48,39 @@ router.post('/createContent', async(req, res, next) => {
   }
 });
 
+router.post('/delete', async(req, res, next) => {
+  try {
+    let results = await db.communicationdelete(req.body.no);
+    if (results == "done") {
+      res.header("Access-Control-Allow-Origin", "*");
+      res.json(results);
+    }
+    else {
+      res.header("Access-Control-Allow-Origin", "*");
+      res.send('x');
+    }
+  } catch(e) {
+    console.log(e);
+    console.log('something happened in communication/read');
+    res.sendStatus(500);
+  }
+});
+
+router.post('/update', async(req, res, next) => {
+  try {
+    let results = await db.communicationupdate(req.body.no, req.body.title, req.body.content)
+    if (results == "done") {
+      res.header("Access-Control-Allow-Origin", "*");
+      res.json(results);
+    }
+    else {
+      res.header("Access-Control-Allow-Origin", "*");
+      res.send('x');
+    }
+  } catch(e) {
+    console.log(e);
+    console.log('something happened in communication/read');
+    res.sendStatus(500);
+  }
+});
 module.exports = router;
