@@ -186,7 +186,10 @@ chirprdb.communicationupdate = (no, title, content, date, time) => {
 
 chirprdb.read = (no) => {
   return new Promise((resolve, reject) => {
-    pool.query(`select no, gmail, name, type, title, content, date, time, best from 게시판 natural join 유저 where no=?`, [no], (err, results) => {
+    pool.query(`select 게시판.no, 유저.gmail, name, type, title, content, date, time, count(게시판추천.no) as best
+    from 게시판 natural join 유저 left join 게시판추천 on 게시판추천.no = 게시판.no
+    where 게시판.no = ?
+    group by 게시판.no `, [no], (err, results) => {
       if(err) {
         return reject(err);
       }
