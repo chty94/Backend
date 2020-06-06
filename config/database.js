@@ -95,7 +95,7 @@ chirprdb.accommodation = () => {
 
 chirprdb.communication = () => {
   return new Promise((resolve, reject) => {
-    pool.query(`select no, name, title, date, time from 게시판 natural join 유저`, (err, results) => {
+    pool.query(`select no, name, title, date, time, best from 게시판 natural join 유저`, (err, results) => {
       if(err) {
         return reject(err);
       }
