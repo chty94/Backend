@@ -95,7 +95,7 @@ chirprdb.accommodation = () => {
 
 chirprdb.communication = () => {
   return new Promise((resolve, reject) => {
-    pool.query(`select no, name, title, date, time, best from 게시판 natural join 유저`, (err, results) => {
+    pool.query(`select no, name, title, date, time from 게시판 natural join 유저`, (err, results) => {
       if(err) {
         return reject(err);
       }
@@ -137,10 +137,11 @@ chirprdb.communicationdelete = (no) => {
     });
   });
 }
-// best 변경
-chirprdb.best = (no, best) => {
+
+// best click
+chirprdb.pushbest = (no, gmail) => {
   return new Promise((resolve, reject) => {
-    pool.query(`update 게시판 set best=? where no=?`, [best, no], (err, results) => {
+    pool.query(`insert into 게시판추천 values(?,?)`, [no, gmail], (err, results) => {
       if(err) {
         return reject(err);
       }
@@ -149,6 +150,17 @@ chirprdb.best = (no, best) => {
   });
 }
 
+// best not click
+chirprdb.deletebest = (no, gmail) => {
+  return new Promise((resolve, reject) => {
+    pool.query(`delete from 게시판추천 where no=? and gmail=?`, [no, gmail], (err, results) => {
+      if(err) {
+        return reject(err);
+      }
+      return resolve("done");
+    });
+  });
+}
 chirprdb.getbest = (no) => {
   return new Promise((resolve, reject) => {
     pool.query(`select gmail from 게시판추천 where no=?`, [no], (err, results) => {
