@@ -149,6 +149,17 @@ chirprdb.best = (no, best) => {
   });
 }
 
+chirprdb.getbest = (no) => {
+  return new Promise((resolve, reject) => {
+    pool.query(`select gmail from 게시판추천 where no=?`, [no], (err, results) => {
+      if(err) {
+        return reject(err);
+      }
+      return resolve(results);
+    });
+  });
+}
+
 // UPDATE `goonin_lounge`.`게시판` SET `title` = 'update', `content` = 'update중입니다.' WHERE (`no` = '5');
 chirprdb.communicationupdate = (no, title, content, date, time) => {
   return new Promise((resolve, reject) => {

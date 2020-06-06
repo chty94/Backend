@@ -27,6 +27,18 @@ router.post('/read', async(req, res, next) => {
   }
 });
 
+router.post('/getbest', async(req, res, next) => {
+  try {
+    let results = await db.getbest(req.body.no);
+    res.header("Access-Control-Allow-Origin", "*");
+    res.json(results);
+  } catch(e) {
+    console.log(e);
+    console.log('something happened in communication/getbest');
+    res.sendStatus(500);
+  }
+});
+
 router.post('/createContent', async(req, res, next) => {
   try {
     console.log('Create Content');
