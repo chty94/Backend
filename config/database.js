@@ -118,7 +118,7 @@ chirprdb.findno = () => {
 
 chirprdb.communicationinsert = (no, gmail, title, content, date, time) => {
   return new Promise((resolve, reject) => {
-    pool.query(`insert into 게시판 values(?, ?, ?, ?, ?, ?)`, [no, gmail, title, content, date, time], (err, results) => {
+    pool.query(`insert into 게시판 values(?, ?, ?, ?, ?, ?, 0)`, [no, gmail, title, content, date, time], (err, results) => {
       if(err) {
         return reject(err);
       }
@@ -130,6 +130,17 @@ chirprdb.communicationinsert = (no, gmail, title, content, date, time) => {
 chirprdb.communicationdelete = (no) => {
   return new Promise((resolve, reject) => {
     pool.query(`delete from 게시판 where no=?`, [no], (err, results) => {
+      if(err) {
+        return reject(err);
+      }
+      return resolve("done");
+    });
+  });
+}
+// best 변경
+chirprdb.best = (no, best) => {
+  return new Promise((resolve, reject) => {
+    pool.query(`update 게시판 set best=? where no=?`, [best, no], (err, results) => {
       if(err) {
         return reject(err);
       }
@@ -152,7 +163,7 @@ chirprdb.communicationupdate = (no, title, content, date, time) => {
 
 chirprdb.read = (no) => {
   return new Promise((resolve, reject) => {
-    pool.query(`select no, gmail, name, type, title, content, date, time from 게시판 natural join 유저 where no=?`, [no], (err, results) => {
+    pool.query(`select no, gmail, name, type, title, content, date, time, best from 게시판 natural join 유저 where no=?`, [no], (err, results) => {
       if(err) {
         return reject(err);
       }
