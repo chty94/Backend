@@ -26,7 +26,46 @@ router.post('/read', async(req, res, next) => {
     res.sendStatus(500);
   }
 });
+// push best
+router.post('/pushbest', async(req, res, next) => {
+  try {
+    let results = await db.pushbest(req.body.no, req.body.gmail);
+    if (results == "done"){
+      res.header("Access-Control-Allow-Origin", "*");
+      res.json(results);
+    }
+    else{
+      res.header("Access-Control-Allow-Origin", "*");
+      res.send('x');
+    }
+    
+  } catch(e) {
+    console.log(e);
+    console.log('something happened in communication/getbest');
+    res.sendStatus(500);
+  }
+});
 
+// delete best
+router.post('/deletebest', async(req, res, next) => {
+  try {
+    let results = await db.deletebest(req.body.no, req.body.gmail);
+    if (results == "done") {
+      res.header("Access-Control-Allow-Origin", "*");
+      res.json(results);
+    }
+    else {
+      res.header("Access-Control-Allow-Origin", "*");
+      res.send("x");
+    }
+  } catch(e) {
+    console.log(e);
+    console.log('something happened in communication/getbest');
+    res.sendStatus(500);
+  }
+});
+
+// get best
 router.post('/getbest', async(req, res, next) => {
   try {
     let results = await db.getbest(req.body.no);
