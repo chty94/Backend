@@ -118,7 +118,7 @@ chirprdb.findno = () => {
 
 chirprdb.communicationinsert = (no, gmail, title, content, date, time) => {
   return new Promise((resolve, reject) => {
-    pool.query(`insert into 게시판 values(?, ?, ?, ?, ?, ?, 0)`, [no, gmail, title, content, date, time], (err, results) => {
+    pool.query(`insert into 게시판 values(?, ?, ?, ?, ?, ?)`, [no, gmail, title, content, date, time], (err, results) => {
       if(err) {
         return reject(err);
       }
