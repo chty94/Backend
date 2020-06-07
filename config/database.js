@@ -50,8 +50,13 @@ chirprdb.insert = (gmail, name, type) => {
 chirprdb.find = (latitude0, longitude0, latitude1, longitude1) => {
   return new Promise((resolve, reject) => {
     pool.query(`select *
-                from 프렌차이즈상세정보2 natural join 프렌차이즈기본할인
-                where latitude > ? and latitude < ? and longitude > ? and longitude < ?`,[latitude0, latitude1, longitude0, longitude1], (err, results) => {
+    from 
+    (select name, category, address, latitude, longitude, information, reference
+    from 프렌차이즈상세정보2 natural join 프렌차이즈기본할인
+    union
+    select name, category, address, latitude, longitude, information, null as reference
+    from 자영업자할인) as sum
+    where latitude > ? and latitude < ? and longitude > ? and longitude < ?`,[latitude0, latitude1, longitude0, longitude1], (err, results) => {
       if(err) {
         return reject(err);
       }
