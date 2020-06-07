@@ -15,7 +15,7 @@ var cardRouter = require('./routes/card');
 var accommodationRouter = require('./routes/accommodation');
 var commuicationRouter = require('./routes/communication');
 var storeRouter = require('./routes/store')
-
+var informationRouter = require('./routes/information')
 
 var app = express();
 var cors = require('cors');
@@ -39,6 +39,7 @@ app.use('/card', cardRouter);
 app.use('/accommodation', accommodationRouter);
 app.use('/communication', commuicationRouter);
 app.use('/store', storeRouter);
+app.use('/information', informationRouter);
 
 app.use(cors());
 

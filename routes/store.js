@@ -24,12 +24,34 @@ router.post('/insert', async(req, res, next) => {
         //            console.log(results)
         //        }
         //    }
+        let results = await db.storeinsert(req.body.gmail, req.body.name, req.body.address, req.body.latitude, req.body.longitude, req.body.category, req.body.phone, req.body.information);
+        if (results == "done") {
+            res.header("Access-Control-Allow-Origin", "*");
+            res.json(results);
+        }
+        else {
+            res.header("Access-Control-Allow-Origin", "*");
+            res.send('x');
+        }
+        
+    } catch(e) {
+        console.log(e);
+        console.log('something happened in store/insert');
+        res.sendStatus(500);
+    }
+});
 
-        var latitude = null;
-        var longitude = null;
-        let results = await db.storeinsert(req.body.gmail, req.body.name, req.body.address, latitude, longitude, req.body.category, req.body.phone, req.body.information);
-        res.header("Access-Control-Allow-Origin", "*");
-        res.json(results);
+router.post('/delete', async(req, res, next) => {
+    try {
+        let results = await db.storedelete(req.body.gmail, req.body.name);
+        if (results == "done") {
+            res.header("Access-Control-Allow-Origin", "*");
+            res.json(results);   
+        }
+        else {
+            res.header("Access-Control-Allow-Origin", "*");
+            res.send('x');   
+        }
     } catch(e) {
         console.log(e);
         console.log('something happened in store/insert');

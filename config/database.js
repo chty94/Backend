@@ -222,4 +222,15 @@ chirprdb.storeinsert = (gmail, name, address, latitude, longitude, category, pho
   });
 }
 
+chirprdb.storedelete = (gmail, name) => {
+  return new Promise((resolve, reject) => {
+    pool.query(`delete from 자영업자할인 where gmail=? and name=?`, [gmail, name], (err, results) => {
+      if(err) {
+        return reject(err);
+      }
+      return resolve("done");
+    });
+  });
+}
+
 module.exports = chirprdb;
