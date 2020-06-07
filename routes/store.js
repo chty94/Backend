@@ -24,7 +24,10 @@ router.post('/insert', async(req, res, next) => {
         //            console.log(results)
         //        }
         //    }
-        let results = await db.storeinsert(req.body.gmail, req.body.name, req.body.address, req.body.latitude, req.body.longitude, req.body.category, req.body.phone, req.body.information);
+
+        var lat = parseFloat(req.body.latitude);
+        var long = parseFloat(req.body.longitude);
+        let results = await db.storeinsert(req.body.gmail, req.body.name, req.body.address, lat, long, req.body.category, req.body.phone, req.body.information);
         if (results == "done") {
             res.header("Access-Control-Allow-Origin", "*");
             res.json(results);
