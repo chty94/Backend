@@ -198,4 +198,28 @@ chirprdb.read = (no) => {
   });
 }
 
+// 자신의 가게 정보 가지고 오기
+chirprdb.store = (gmail) => {
+  return new Promise((resolve, reject) => {
+    pool.query(`select 유저.gmail, 유저.name, 자영업자할인.name as storename, 자영업자할인.address, 자영업자할인.latitude, 자영업자할인.longitude, 자영업자할인.category, 자영업자할인.phone, 자영업자할인.information from 자영업자할인 join 유저 where 자영업자할인.gmail=유저.gmail and 유저.gmail=?`, [gmail], (err, results) => {
+      if(err) {
+        return reject(err);
+      }
+      return resolve(results);
+    });
+  });
+}
+
+// 가게 등록
+chirprdb.storeinsert = (gmail, name, address, latitude, longitude, category, phone, information) => {
+  return new Promise((resolve, reject) => {
+    pool.query(`insert into 자영업자할인 values(?,?,?,?,?,?,?,?) `, [gmail, name, address, latitude, longitude, category, phone, information], (err, results) => {
+      if(err) {
+        return reject(err);
+      }
+      return resolve("done");
+    });
+  });
+}
+
 module.exports = chirprdb;
