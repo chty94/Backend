@@ -11,6 +11,28 @@ var pool = mysql.createPool({
 });
 
 let chirprdb = {};
+
+chirprdb.hotrank = () => {
+  return new Promise((resolve, reject) => {
+    pool.query(`select *
+                from
+                (
+                select *
+                from 게시판 natural join (select no, count(gmail) as best, '0' as type from 게시판추천 group by no) as A
+                union
+                select *
+                from 정보게시판 natural join (select no, count(gmail) as best, '1' as type from 정보게시판추천 group by no) as B
+                ) as C natural join (select gmail, name from 유저) as D
+                where C.best >= 2 and C.gmail = D.gmail
+                order by best desc`, (err, results) => {
+      if(err) {
+        return reject(err);
+      }
+      return resolve(results);
+    });
+  });
+}
+
 chirprdb.all = () => {
   return new Promise((resolve, reject) => {
     pool.query(`select * from  유저`, (err, results) => {

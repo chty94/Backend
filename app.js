@@ -16,6 +16,8 @@ var accommodationRouter = require('./routes/accommodation');
 var commuicationRouter = require('./routes/communication');
 var storeRouter = require('./routes/store')
 var informationRouter = require('./routes/infocommunication')
+var hotrankRouter = require('./routes/hotrank')
+
 
 var app = express();
 var cors = require('cors');
@@ -40,6 +42,8 @@ app.use('/accommodation', accommodationRouter);
 app.use('/communication', commuicationRouter);
 app.use('/store', storeRouter);
 app.use('/infocommunication', informationRouter);
+app.use('/hotrank', hotrankRouter);
+
 
 app.use(cors());
 
