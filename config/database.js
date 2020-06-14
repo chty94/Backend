@@ -348,7 +348,7 @@ chirprdb.storedelete = (gmail, name) => {
 
 chirprdb.storeupdate = (gmail, name, address, latitude, longitude, category, phone, information) => {
   return new Promise((resolve, reject) => {
-    pool.query(`update 자영업자할인 set gmail=?, name=?, address=?, latitude=?, longitude=?, category=?, phone=?, information=? where no=? and name=?`, [gmail, name, address, latitude, longitude, category, phone, information, gmail, name], (err, results) => {
+    pool.query(`update 자영업자할인 set name=?, address=?, latitude=?, longitude=?, category=?, phone=?, information=? where gmail=? and name=?`, [name, address, latitude, longitude, category, phone, information, gmail, name], (err, results) => {
       if(err) {
         return reject(err);
       }
