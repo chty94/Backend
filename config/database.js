@@ -44,7 +44,7 @@ chirprdb.dailyhotrank = () => {
                 select *
                 from 정보게시판 natural join (select no, count(gmail) as best, '1' as type from 정보게시판추천 group by no) as B
                 ) as C natural join (select gmail, name from 유저) as D
-                where C.best >= 2 and C.gmail = D.gmail and date = curdate()
+                where C.best >= 2 and C.gmail = D.gmail and date = "2020-06-15"
                 order by best desc limit 0, 10`, (err, results) => {
       if(err) {
         return reject(err);
@@ -65,7 +65,7 @@ chirprdb.weekhotrank = () => {
                 select *
                 from 정보게시판 natural join (select no, count(gmail) as best, '1' as type from 정보게시판추천 group by no) as B
                 ) as C natural join (select gmail, name from 유저) as D
-                where C.best >= 2 and C.gmail = D.gmail and date <= curdate() and date >= date(subdate(now(), INTERVAL 7 DAY))
+                where C.best >= 2 and C.gmail = D.gmail and date <= "2020-06-15" and date >= "2020-06-08"
                 order by best desc limit 0, 10`, (err, results) => {
       if(err) {
         return reject(err);
@@ -86,7 +86,7 @@ chirprdb.monthhotrank = () => {
                 select *
                 from 정보게시판 natural join (select no, count(gmail) as best, '1' as type from 정보게시판추천 group by no) as B
                 ) as C natural join (select gmail, name from 유저) as D
-                where C.best >= 2 and C.gmail = D.gmail and date <= curdate() and date >= date(subdate(now(), INTERVAL 30 DAY))
+                where C.best >= 2 and C.gmail = D.gmail and date <= "2020-06-15" and date >= "2020-05-16"
                 order by best desc limit 0, 10`, (err, results) => {
       if(err) {
         return reject(err);
