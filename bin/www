@@ -7,13 +7,13 @@
 var app = require('../app');
 var debug = require('debug')('backend:server');
 var http = require('http');
-var https = require('https');
-var fs = require('fs');
+// var https = require('https');
+// var fs = require('fs');
 
-var options = {
-  key : fs.readFileSync("../key.pem"),
-  cert : fs.readFileSync("../cert.pem")
-}
+// var options = {
+//   key : fs.readFileSync("../key.pem"),
+//   cert : fs.readFileSync("../cert.pem")
+// }
 
 /**
  * Get port from environment and store in Express.
@@ -27,19 +27,19 @@ app.set('port', port);
  */
 
 var server = http.createServer(app);
-var https_server = https.createServer(options, app);
+// var https_server = https.createServer(options, app);
 
 /**
  * Listen on provided port, on all network interfaces.
  */
 
 server.listen(port);
-https_server.listen('8443', function(){
-	console.log("https start");
-});
+// https_server.listen('8443', function(){
+// 	console.log("https start");
+// });
 server.on('error', onError);
 server.on('listening', onListening);
-https_server.on('listening', onListening2);
+// https_server.on('listening', onListening2);
 
 /**
  * Normalize a port into a number, string, or false.
@@ -101,10 +101,10 @@ function onListening() {
   debug('Listening on ' + bind);
 }
 
-function onListening2() {
-  var addr = https_server.address();
-  var bind = typeof addr === 'string'
-    ? 'pipe ' + addr
-    : 'port ' + addr.port;
-  debug('Listening on ' + bind);
-}
+// function onListening2() {
+//   var addr = https_server.address();
+//   var bind = typeof addr === 'string'
+//     ? 'pipe ' + addr
+//     : 'port ' + addr.port;
+//   debug('Listening on ' + bind);
+// }

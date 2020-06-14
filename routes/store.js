@@ -62,4 +62,24 @@ router.post('/delete', async(req, res, next) => {
     }
   });
 
+router.post('/update', async(req, res, next) => {
+    try {
+        var lat = parseFloat(req.body.latitude);
+        var long = parseFloat(req.body.longitude);
+        let results = await db.storeinsert(req.body.gmail, req.body.name, req.body.address, lat, long, req.body.category, req.body.phone, req.body.information);
+        if (results == "done") {
+            res.header("Access-Control-Allow-Origin", "*");
+            res.json(results);   
+        }
+        else {
+            res.header("Access-Control-Allow-Origin", "*");
+            res.send('x');   
+        }
+    } catch(e) {
+        console.log(e);
+        console.log('something happened in store/insert');
+        res.sendStatus(500);
+    }
+  }); 
+
 module.exports = router;

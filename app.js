@@ -13,6 +13,7 @@ var findRouter = require('./routes/find');
 var franchiseRouter = require('./routes/franchise');
 var cardRouter = require('./routes/card');
 var accommodationRouter = require('./routes/accommodation');
+var showstoreRouter = require('./routes/showstore');
 var commuicationRouter = require('./routes/communication');
 var storeRouter = require('./routes/store')
 var informationRouter = require('./routes/infocommunication')
@@ -21,6 +22,7 @@ var hotrankRouter = require('./routes/hotrank')
 
 var app = express();
 var cors = require('cors');
+const { showstore } = require('./config/database');
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
@@ -40,6 +42,7 @@ app.use('/franchise', franchiseRouter);
 app.use('/card', cardRouter);
 app.use('/accommodation', accommodationRouter);
 app.use('/communication', commuicationRouter);
+app.use('/showstore', showstoreRouter);
 app.use('/store', storeRouter);
 app.use('/infocommunication', informationRouter);
 app.use('/hotrank', hotrankRouter);

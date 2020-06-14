@@ -346,4 +346,26 @@ chirprdb.storedelete = (gmail, name) => {
   });
 }
 
+chirprdb.storeupdate = (gmail, name, address, latitude, longitude, category, phone, information) => {
+  return new Promise((resolve, reject) => {
+    pool.query(`update 자영업자할인 set gmail=?, name=?, address=?, latitude=?, longitude=?, category=?, phone=?, information=? where no=? and name=?`, [gmail, name, address, latitude, longitude, category, phone, information, gmail, name], (err, results) => {
+      if(err) {
+        return reject(err);
+      }
+      return resolve("done");
+    });
+  });
+}
+
+chirprdb.showstore = () => {
+  return new Promise((resolve, reject) => {
+    pool.query(`SELECT * FROM goonin_lounge.자영업자할인 limit 0, 8`, (err, results) => {
+      if(err) {
+        return reject(err);
+      }
+      return resolve(results);
+    });
+  });
+}
+
 module.exports = chirprdb;
