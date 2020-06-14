@@ -24,7 +24,7 @@ chirprdb.hotrank = () => {
                 from 정보게시판 natural join (select no, count(gmail) as best, '1' as type from 정보게시판추천 group by no) as B
                 ) as C natural join (select gmail, name from 유저) as D
                 where C.best >= 2 and C.gmail = D.gmail
-                order by best desc`, (err, results) => {
+                order by best desc limit 0, 10`, (err, results) => {
       if(err) {
         return reject(err);
       }
@@ -45,7 +45,7 @@ chirprdb.dailyhotrank = () => {
                 from 정보게시판 natural join (select no, count(gmail) as best, '1' as type from 정보게시판추천 group by no) as B
                 ) as C natural join (select gmail, name from 유저) as D
                 where C.best >= 2 and C.gmail = D.gmail and date = curdate()
-                order by best desc`, (err, results) => {
+                order by best desc limit 0, 10`, (err, results) => {
       if(err) {
         return reject(err);
       }
@@ -66,7 +66,7 @@ chirprdb.weekhotrank = () => {
                 from 정보게시판 natural join (select no, count(gmail) as best, '1' as type from 정보게시판추천 group by no) as B
                 ) as C natural join (select gmail, name from 유저) as D
                 where C.best >= 2 and C.gmail = D.gmail and date <= curdate() and date >= date(subdate(now(), INTERVAL 7 DAY))
-                order by best desc`, (err, results) => {
+                order by best desc limit 0, 10`, (err, results) => {
       if(err) {
         return reject(err);
       }
@@ -87,7 +87,7 @@ chirprdb.monthhotrank = () => {
                 from 정보게시판 natural join (select no, count(gmail) as best, '1' as type from 정보게시판추천 group by no) as B
                 ) as C natural join (select gmail, name from 유저) as D
                 where C.best >= 2 and C.gmail = D.gmail and date <= curdate() and date >= date(subdate(now(), INTERVAL 30 DAY))
-                order by best desc`, (err, results) => {
+                order by best desc limit 0, 10`, (err, results) => {
       if(err) {
         return reject(err);
       }
