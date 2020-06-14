@@ -314,7 +314,7 @@ chirprdb.read = (no) => {
 // 자신의 가게 정보 가지고 오기
 chirprdb.store = (gmail) => {
   return new Promise((resolve, reject) => {
-    pool.query(`select 유저.gmail, 유저.name, 자영업자할인.name as storename, 자영업자할인.address, 자영업자할인.latitude, 자영업자할인.longitude, 자영업자할인.category, 자영업자할인.phone, 자영업자할인.information from 자영업자할인 join 유저 where 자영업자할인.gmail=유저.gmail and 유저.gmail=?`, [gmail], (err, results) => {
+    pool.query(`select 유저.gmail, 유저.name as personname, 자영업자할인.name as name, 자영업자할인.address, 자영업자할인.latitude, 자영업자할인.longitude, 자영업자할인.category, 자영업자할인.phone, 자영업자할인.information from 자영업자할인 join 유저 where 자영업자할인.gmail=유저.gmail and 유저.gmail=?`, [gmail], (err, results) => {
       if(err) {
         return reject(err);
       }
@@ -359,7 +359,7 @@ chirprdb.storeupdate = (gmail, name, address, latitude, longitude, category, pho
 
 chirprdb.showstore = () => {
   return new Promise((resolve, reject) => {
-    pool.query(`SELECT * FROM goonin_lounge.자영업자할인 limit 0, 8`, (err, results) => {
+    pool.query(`SELECT * FROM goonin_lounge.자영업자할인`, (err, results) => {
       if(err) {
         return reject(err);
       }
