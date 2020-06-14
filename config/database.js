@@ -357,9 +357,20 @@ chirprdb.storeupdate = (gmail, name, address, latitude, longitude, category, pho
   });
 }
 
-chirprdb.showstore = () => {
+chirprdb.showstore = (page) => {
   return new Promise((resolve, reject) => {
-    pool.query(`SELECT * FROM goonin_lounge.자영업자할인`, (err, results) => {
+    pool.query(`SELECT * FROM goonin_lounge.자영업자할인 limit ?, 5`, [page], (err, results) => {
+      if(err) {
+        return reject(err);
+      }
+      return resolve(results);
+    });
+  });
+}
+
+chirprdb.showstoretotalpage = () => {
+  return new Promise((resolve, reject) => {
+    pool.query(`SELECT count(*) as total FROM goonin_lounge.자영업자할인`, (err, results) => {
       if(err) {
         return reject(err);
       }
