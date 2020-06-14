@@ -36,7 +36,7 @@ chirprdb.infototalpage = () => {
 
 chirprdb.infocommunication = (page) => {
   return new Promise((resolve, reject) => {
-    pool.query(`select no, name, title, date, time from 정보게시판 natural join 유저 order by no limit ?, 5`, [page], (err, results) => {
+    pool.query(`select no, name, title, date, time from 정보게시판 natural join 유저 order by no desc limit ?, 5`, [page], (err, results) => {
       if(err) {
         return reject(err);
       }
