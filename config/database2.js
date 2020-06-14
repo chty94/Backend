@@ -23,6 +23,29 @@ chirprdb.infocommunication = () => {
   });
 }
 
+chirprdb.infototalpage = () => {
+  return new Promise((resolve, reject) => {
+    pool.query(`select count(*) as total from 정보게시판`, (err, results) => {
+      if(err) {
+        return reject(err);
+      }
+      return resolve(results);
+    });
+  });
+}
+
+chirprdb.infocommunication = (page) => {
+  return new Promise((resolve, reject) => {
+    pool.query(`select no, name, title, date, time from 정보게시판 natural join 유저 order by no limit ?, 5`, [page], (err, results) => {
+      if(err) {
+        return reject(err);
+      }
+      return resolve(results);
+    });
+  });
+}
+
+
 // select no from 게시판 order by no DESC limit 1;
 chirprdb.infofindno = () => {
   return new Promise((resolve, reject) => {

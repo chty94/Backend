@@ -131,6 +131,28 @@ chirprdb.communication = () => {
   });
 }
 
+chirprdb.totalpage = () => {
+  return new Promise((resolve, reject) => {
+    pool.query(`select count(*) as total from 게시판`, (err, results) => {
+      if(err) {
+        return reject(err);
+      }
+      return resolve(results);
+    });
+  });
+}
+
+chirprdb.communication = (page) => {
+  return new Promise((resolve, reject) => {
+    pool.query(`select no, name, title, date, time from 게시판 natural join 유저 order by no limit ?, 5`, [page], (err, results) => {
+      if(err) {
+        return reject(err);
+      }
+      return resolve(results);
+    });
+  });
+}
+
 // select no from 게시판 order by no DESC limit 1;
 chirprdb.findno = () => {
   return new Promise((resolve, reject) => {
